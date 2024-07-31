@@ -1,12 +1,15 @@
 const express = require('express')
 const app = express()
+const { readFileSync } = require('fs')
+
+const inicio = readFileSync('../InicioSesion/inicio.html')
 
 const desiredPORT = process.env.PORT ??1234
 
 app.get('/', (req, res) =>{
-    
-        res.statusCode = 200
-        res.end('SI PUDE')
+        res.writeHead(200,{'Content-Type':'text/html'})
+        res.write(inicio)
+        res.end()
     
 })
 
@@ -15,11 +18,6 @@ app.get('/', (req, res) =>{
 app.listen(desiredPORT, () =>{
     console.log(`listening on port http://localhost:${desiredPORT}`)
 })
-
-
-
-
-
 
 
 
@@ -57,4 +55,20 @@ app.listen(desiredPORT, () =>{
 // server.listen(desiredPORT, () =>{
 //     console.log(`listening on port http://localhost:${desiredPORT}`)
 // })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
