@@ -1,17 +1,68 @@
 const express = require('express')
 const app = express()
-const { readFileSync } = require('fs')
+const {readFile} = require('fs').promises
 
-const inicio = readFileSync('../InicioSesion/inicio.html')
+const metodo = async (path) =>{
+   try{
+    const archivo = await readFile(path,) 
+    return archivo
+   }
+   catch(err){
+    console.log(err)
+   }
+  
+}
+
+    // const metodo = (path) =>{
+    //     return new Promise ((resolve,reject) =>{
+    //         readFile(path,'utf-8', (err,data)=>{
+    //             if(err){
+    //                 reject (err)
+    //             }else{
+    //                 return resolve (data)
+    //             }
+                
+    //         })
+    //     })
+    // }
 
 const desiredPORT = process.env.PORT ??1234
 
-app.get('/', (req, res) =>{
-        res.writeHead(200,{'Content-Type':'text/html'})
-        res.write(inicio)
-        res.end()
-    
+app.get('/',async (req, res) =>{
+
+    const path = await metodo('../InicioSesion/inicio.html')
+
+    res.writeHead(200,{'Content-Type':'text/html'})
+     res.write(path)
+     res.end()   
 })
+app.get('/styles.css',async (req, res) =>{
+
+    const path = await metodo('../InicioSesion/styles.css')
+
+    res.writeHead(200,{'Content-Type':'text/css'})
+     res.write(path)
+     res.end()   
+})
+//REGISTRO
+
+app.get('/registro',async (req, res) =>{
+
+    const path = await metodo('../registro/registro.html')
+
+    res.writeHead(200,{'Content-Type':'text/html'})
+     res.write(path)
+     res.end()   
+})
+app.get('/styles.css',async (req, res) =>{
+
+    const path = await metodo('../Registro/styles.css')
+
+    res.writeHead(200,{'Content-Type':'text/css'})
+     res.write(path)
+     res.end()   
+})
+
 
 
 

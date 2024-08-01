@@ -27,7 +27,7 @@ const start = async () =>{
 start()
 
 
-const ht = reqi
+
 // FUNCION PARA LEER ARCHIVOS PROMISE
 
 // const getText = (path) =>{
